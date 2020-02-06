@@ -37,9 +37,10 @@ public class ArticleController {
         article.setTitle(newArticle.getTitle());
         article.setDate(newArticle.getDate());
         article.setAuthor(newArticle.getAuthor());
+        article.setUser(newArticle.getuser());
         article.setContent(newArticle.getContent());
         article.setClaps(newArticle.getClaps());
-        article.setUser_id(newArticle.getUser_id());
+        
         return ArticleRepository.save(article);
         
     }

@@ -4,10 +4,12 @@ import java.sql.Date;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @Entity
-@Table(name = "artiles")
+@Table(name = "articles")
 @EntityListeners(AuditingEntityListener.class)
 public class Article {
 
@@ -23,13 +25,26 @@ public class Article {
     private Date date;
     @Column(name = "author", nullable = false)
     private String author;
-
+    @Column(name = "user", nullable = false)
+    private User user;
     @Column(name = "content", nullable = false)
     private String content;
     @Column(name = "claps", nullable = false)
     private int claps;
-    @Column(name = "user_id", nullable = false)
-    private int user_id;
+    
+
+    @ManyToOne
+    @JoinColumn
+    @JsonIgnoreProperties("articles")
+    private User User;
+
+    public User getuser() {
+        return this.user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public long getId() {
         return id;
     }
@@ -78,13 +93,9 @@ public class Article {
         this.claps = claps;
     }
 
-    public int getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
-
+    
+    
+   
 }
+
     

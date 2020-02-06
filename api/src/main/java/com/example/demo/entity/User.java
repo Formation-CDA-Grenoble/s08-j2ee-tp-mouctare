@@ -1,7 +1,10 @@
 package com.example.demo.entity;
 
+import java.util.Set;
+
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -20,6 +23,8 @@ public class User {
 
     @Column(name = "email", nullable = false)
     private String email;
+
+    
 
     public long getId() {
         return id;
@@ -44,4 +49,7 @@ public class User {
     public void setEmail(String email) {
         this.email = email;
     }
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    private Set<Article> article;
 }
